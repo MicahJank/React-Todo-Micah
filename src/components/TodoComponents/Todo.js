@@ -9,7 +9,6 @@ const Task = styled.div`
     }
 `;
 
-
 const Todo = ( { todo, toggleCompleted } ) => {
     console.log(todo.completed);
     return (

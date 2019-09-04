@@ -52,7 +52,14 @@ class App extends React.Component {
         return todo.id === todoId ? {...todo, completed: !todo.completed} : todo;
       })
     })
-    console.log()
+  }
+
+  clearCompleted = () => {
+    this.setState({
+      todos: this.state.todos.filter(todo => {
+        return !todo.completed;
+      })
+    })
   }
 
   render() {
@@ -60,7 +67,7 @@ class App extends React.Component {
       <div>
         <h2>Welcome to your Todo App!</h2>
         <h3>Todo's</h3>
-        <TodoForm handleChange={this.handleFormChanges} handleSubmit={this.handleFormSubmit} />
+        <TodoForm handleChange={this.handleFormChanges} handleSubmit={this.handleFormSubmit} clearCompleted={this.clearCompleted} />
         <TodoList todos={this.state.todos} toggleCompleted={this.toggleCompleted} />
       </div>
     );
