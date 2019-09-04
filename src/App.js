@@ -12,8 +12,47 @@ class App extends React.Component {
   constructor() {
     super();
     this.state = {
-      todos
+      todos,
+      todoName: ''
     }
+  }
+
+  // handler function will be passed down to TodoForm through props
+  handleFormChanges = (e) => {
+    this.setState({
+      todoName: e.target.value
+    })
+  }
+
+
+  addItem = (e, taskName) => {
+    e.preventDefault();
+    const newTask = {
+      task: taskName,
+      id: Date.now(),
+      completed: false
+    };
+    this.setState({
+      todos: [...this.state.todos, newTask],
+      todoName: ''
+    });
+  }
+
+  
+  handleFormSubmit = (e) => {
+    this.addItem(e, this.state.todoName);
+    this.setState({
+      todoName: ''
+    })
+  }
+
+  toggleCompleted = (todoId) => {
+    this.setState({
+      todos: this.state.todos.map(todo => {
+        return todo.id === todoId ? {...todo, completed: !todo.completed} : todo;
+      })
+    })
+    console.log()
   }
 
   render() {
@@ -21,7 +60,8 @@ class App extends React.Component {
       <div>
         <h2>Welcome to your Todo App!</h2>
         <h3>Todo's</h3>
-        <TodoList todos={this.state.todos} />
+        <TodoForm handleChange={this.handleFormChanges} handleSubmit={this.handleFormSubmit} />
+        <TodoList todos={this.state.todos} toggleCompleted={this.toggleCompleted} />
       </div>
     );
   }
