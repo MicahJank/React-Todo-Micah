@@ -2,18 +2,31 @@ import React from 'react';
 
 import todos from './todos.js';
 
-import { Container } from 'semantic-ui-react';
+import { Container, Header } from 'semantic-ui-react';
 import styled from 'styled-components';
 
 import TodoForm from './components/TodoComponents/TodoForm.js';
 import TodoList from './components/TodoComponents/TodoList.js';
 import Stats from './components/TodoComponents/Stats.js';
 
+const Main = styled.div`
+  height: 100%;
+
+  .ui.fluid.container {
+    height: 100%;
+  }
+`;
 
 const TopBar = styled.div`
   display: flex;
   justify-content: center;
   padding: 50px;
+  background-color: #bb1333;
+  
+  .ui.header {
+    color: white;
+    font-size: 3rem;
+  }
 `;
 
 const StatsBar = styled.div`
@@ -34,6 +47,11 @@ const UncompletedTasks = styled.div`
 const CompletedTasks = styled.div`
   display: flex;
   flex-direction: column;
+`;
+
+const TaskSection = styled.div`
+  background-color: #EFEFF3;
+  height: 100%;
 `;
 
 class App extends React.Component {
@@ -108,30 +126,32 @@ class App extends React.Component {
 
   render() {
     return (
-      <Container>
-        <TopBar>
-          <h2>Lambda ToDo</h2>
-        </TopBar>
-        
-        <StatsBar>
-          <Stats />
-        </StatsBar>
-        
-        <AddTaskContainer>
-          <TodoForm handleChange={this.handleFormChanges} handleSubmit={this.handleFormSubmit} clearCompleted={this.clearCompleted} />
-        </AddTaskContainer>
+      <Main>
+        <Container fluid>
+          <TopBar>
+            <Header as='h1'>Lambda ToDo</Header>
+          </TopBar>
+          
+          <StatsBar>
+            <Stats />
+          </StatsBar>
 
-        <UncompletedTasks>
-          <TodoList todos={this.completedTodos(false)} toggleCompleted={this.toggleCompleted} />
-        </UncompletedTasks>
+          <TaskSection>
+            <AddTaskContainer>
+              <TodoForm handleChange={this.handleFormChanges} handleSubmit={this.handleFormSubmit} clearCompleted={this.clearCompleted} />
+            </AddTaskContainer>
 
-        <CompletedTasks>
-          <TodoList todos={this.completedTodos(true)} toggleCompleted={this.toggleCompleted} />
-        </CompletedTasks>
+            <UncompletedTasks>
+              <TodoList todos={this.completedTodos(false)} toggleCompleted={this.toggleCompleted} />
+            </UncompletedTasks>
 
-      
-        
-      </Container>
+            <CompletedTasks>
+              <TodoList todos={this.completedTodos(true)} toggleCompleted={this.toggleCompleted} />
+            </CompletedTasks>
+          </TaskSection>
+          
+        </Container>
+      </Main>
     );
   }
 }
