@@ -10,7 +10,6 @@ const Task = styled.div`
 `;
 
 const Todo = ( { todo, toggleCompleted } ) => {
-    console.log(todo.completed);
     return (
         <Task onClick={() => toggleCompleted(todo.id)}>
             <p className={`task ${todo.completed ? 'completed' : ''}`}>{todo.task}</p>

@@ -7,15 +7,18 @@ import styled from 'styled-components';
 
 import TodoForm from './components/TodoComponents/TodoForm.js';
 import TodoList from './components/TodoComponents/TodoList.js';
+import Stats from './components/TodoComponents/Stats.js';
 
 
 const TopBar = styled.div`
   display: flex;
+  justify-content: center;
   padding: 50px;
 `;
 
 const StatsBar = styled.div`
   display: flex;
+  justify-content: center;
   padding: 15px;
 `;
 
@@ -110,7 +113,9 @@ class App extends React.Component {
           <h2>Lambda ToDo</h2>
         </TopBar>
         
-        <StatsBar></StatsBar>
+        <StatsBar>
+          <Stats />
+        </StatsBar>
         
         <AddTaskContainer>
           <TodoForm handleChange={this.handleFormChanges} handleSubmit={this.handleFormSubmit} clearCompleted={this.clearCompleted} />
