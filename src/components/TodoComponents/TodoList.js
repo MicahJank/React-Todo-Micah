@@ -12,7 +12,7 @@ const Todos = styled.div`
     }
 `;
 
-const TodoList = ( { todos, toggleCompleted } ) => {
+const TodoList = ( { todos, toggleCompleted, completed, deleteTodo } ) => {
 
     if(!todos.length) {
         return (
@@ -23,7 +23,7 @@ const TodoList = ( { todos, toggleCompleted } ) => {
             <Todos>
                     {todos.map(todo => {
                     return (
-                        <Todo key={todo.id} todo={todo} toggleCompleted={toggleCompleted} />   
+                        <Todo key={todo.id} todo={todo} toggleCompleted={toggleCompleted} completed={completed} deleteTodo={deleteTodo} />   
                     );
                     }) } 
             </Todos>

@@ -36,7 +36,23 @@ const StatsBar = styled.div`
 `;
 
 const AddTaskContainer = styled.div`
-  margin: 15px 10px;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  padding: 20px;
+
+  .ui.form {
+    display: flex;
+
+    .field input {
+      width: 530px;
+    }
+  }
+
+  .ui.basic.icon.button {
+    position: absolute;
+    height: 100%;
+  }
 `;
 
 const UncompletedTasks = styled.div`
@@ -123,6 +139,13 @@ class App extends React.Component {
     })
   }
 
+  deleteTodo = (e, todoId) => {
+    e.stopPropagation();
+    this.setState({
+      todos: this.state.todos.filter(todo => todo.id !== todoId)
+    })
+  }
+
   // completedTodos will be called inside of the todoList component as a prop, important to note however that we are NOT passing this FUNCTION down
   // as a prop, but rather we will be passing down the RESULT of calling this function as a prop. That way we can re use the TodoList component and have it render both the
   // completed todos and the uncompleted todos separately.
@@ -145,7 +168,7 @@ class App extends React.Component {
           </TopBar>
           
           <StatsBar>
-            <Stats />
+            <Stats completedTodos={this.completedTodos} />
           </StatsBar>
 
           <TaskSection>
@@ -155,14 +178,14 @@ class App extends React.Component {
 
             <UncompletedTasks>
               <div className='todo-label'>Todo's</div>
-              <TodoList todos={this.completedTodos(false)} toggleCompleted={this.toggleCompleted} />
+              <TodoList completed={false} todos={this.completedTodos(false)} toggleCompleted={this.toggleCompleted} deleteTodo={this.deleteTodo} />
             </UncompletedTasks>
 
             <Divider />
 
             <CompletedTasks>
               <div className='todo-label'>Completed Todo's</div>
-              <TodoList todos={this.completedTodos(true)} toggleCompleted={this.toggleCompleted} />
+              <TodoList completed={true} todos={this.completedTodos(true)} toggleCompleted={this.toggleCompleted} deleteTodo={this.deleteTodo}  />
             </CompletedTasks>
           </TaskSection>
           

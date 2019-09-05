@@ -7,7 +7,7 @@ import styled from 'styled-components';
 const Task = styled.div`
    display: flex;
    justify-content: space-between;
-   align-items: baseline;
+   align-items: center;
    width: 60%;
    margin: 20px auto;
    padding: 10px;
@@ -17,9 +17,14 @@ const Task = styled.div`
 
    div {
        display: flex
+       align-items: baseline; 
 
        .circle.icon {
            margin-right: 20px;
+       }
+
+       p {
+           font-size: 1.5rem;
        }
    }
 
@@ -29,14 +34,14 @@ const Task = styled.div`
 }
 `;
 
-const Todo = ( { todo, toggleCompleted } ) => {
+const Todo = ( { todo, toggleCompleted, completed, deleteTodo } ) => {
     return (
         <Task onClick={() => toggleCompleted(todo.id)}>
             <div>
-                <Icon name='circle' />
+                <Icon color={completed ? 'green' : 'red'} name='circle' />
                 <p>{todo.task}</p>
             </div>
-            <Button>Delete</Button>
+            <Button onClick={(e) => deleteTodo(e, todo.id)}>Delete</Button>
         </Task>
     );
 }
