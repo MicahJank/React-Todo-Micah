@@ -16,7 +16,7 @@ const TodoList = ( { todos, toggleCompleted } ) => {
 
     if(!todos.length) {
         return (
-            <h4>No todo's yet...</h4>
+            <div>No todo's yet...</div>
         );
     } else {
         return (

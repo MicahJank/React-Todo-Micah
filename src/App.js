@@ -2,7 +2,7 @@ import React from 'react';
 
 import todos from './todos.js';
 
-import { Container, Header } from 'semantic-ui-react';
+import { Container, Header, Divider } from 'semantic-ui-react';
 import styled from 'styled-components';
 
 import TodoForm from './components/TodoComponents/TodoForm.js';
@@ -42,11 +42,23 @@ const AddTaskContainer = styled.div`
 const UncompletedTasks = styled.div`
   display: flex;
   flex-direction: column;
+  margin-top: 20px;
+  margin-bottom: 30px;
+
+  .todo-label {
+    font-size: 1.5rem;
+  }
 `;
 
 const CompletedTasks = styled.div`
   display: flex;
   flex-direction: column;
+  margin-top: 20px;
+  margin-bottom: 30px;
+
+  .todo-label {
+    font-size: 1.5rem;
+  }
 `;
 
 const TaskSection = styled.div`
@@ -142,10 +154,14 @@ class App extends React.Component {
             </AddTaskContainer>
 
             <UncompletedTasks>
+              <div className='todo-label'>Todo's</div>
               <TodoList todos={this.completedTodos(false)} toggleCompleted={this.toggleCompleted} />
             </UncompletedTasks>
 
+            <Divider />
+
             <CompletedTasks>
+              <div className='todo-label'>Completed Todo's</div>
               <TodoList todos={this.completedTodos(true)} toggleCompleted={this.toggleCompleted} />
             </CompletedTasks>
           </TaskSection>
