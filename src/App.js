@@ -8,6 +8,7 @@ import styled from 'styled-components';
 import TodoForm from './components/TodoComponents/TodoForm.js';
 import TodoList from './components/TodoComponents/TodoList.js';
 import Stats from './components/TodoComponents/Stats.js';
+import { reset } from 'ansi-colors';
 
 const Main = styled.div`
   height: 100%;
@@ -173,7 +174,7 @@ class App extends React.Component {
 
           <TaskSection>
             <AddTaskContainer>
-              <TodoForm handleChange={this.handleFormChanges} handleSubmit={this.handleFormSubmit} clearCompleted={this.clearCompleted} />
+              <TodoForm handleChange={this.handleFormChanges} handleSubmit={this.handleFormSubmit} clearCompleted={this.clearCompleted} todoName={this.state.todoName} />
             </AddTaskContainer>
 
             <UncompletedTasks>
